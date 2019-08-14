@@ -5,14 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ODENet",
-    version="0.0.1",
-    author="Y Ge",
+    version="0.0.4",
+    author="Y.Ge",
     author_email="y.ge1222@gmail.com",
     description="A small example package",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    # url="https://github.com/pypa/sampleproject",
-    py_modules=['models']
+    url="https://github.com/uqyge/ODENet",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
