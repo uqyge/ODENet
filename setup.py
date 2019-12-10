@@ -1,3 +1,6 @@
+import ODENet.dataScaling
+
+#%%
 import setuptools
 
 with open("README.md", "r") as fh:
@@ -5,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ODENet",
-    version="0.0.4",
+    version="0.0.5",
     author="Y.Ge",
     author_email="y.ge1222@gmail.com",
     description="A small example package",

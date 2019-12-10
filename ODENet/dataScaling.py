@@ -25,6 +25,7 @@ class data_scaler(object):
             "log2": "log2",
             "sqrt_std": "sqrt_std",
             "cbrt_std": "cbrt_std",
+            "min_cbrt_std": "min_cbrt_std",
             "nrt_std": "nrt_std",
             "cb_std": "cb_std",
             "tan": "tan",
@@ -82,6 +83,14 @@ class data_scaler(object):
         if self.switcher.get(self.case) == "cbrt_std":
             out = np.cbrt(np.asarray(input_data / self.scale))
             self.std = StandardScaler()
+            out = self.std.fit_transform(out)
+
+        if self.switcher.get(self.case) == "min_cbrt_std":
+            self.norm = MinMaxScaler()
+            self.std = StandardScaler()
+
+            out = self.norm.fit_transform(input_data)
+            out = np.cbrt(out)
             out = self.std.fit_transform(out)
 
         if self.switcher.get(self.case) == "nrt_std":
@@ -142,6 +151,11 @@ class data_scaler(object):
             out = np.cbrt(np.asarray(input_data / self.scale))
             out = self.std.transform(out)
 
+        if self.switcher.get(self.case) == "min_cbrt_std":
+            out = self.norm.transform(input_data)
+            out = np.cbrt(out)
+            out = self.std.transform(out)
+
         if self.switcher.get(self.case) == "nrt_std":
             out = np.power(np.asarray(input_data / self.scale), 1 / 4)
             out = self.std.transform(out)
@@ -196,6 +210,11 @@ class data_scaler(object):
         if self.switcher.get(self.case) == "cbrt_std":
             out = self.std.inverse_transform(input_data)
             out = np.power(out, 3) * self.scale
+
+        if self.switcher.get(self.case) == "min_cbrt_std":
+            out = self.std.inverse_transform(input_data)
+            out = np.power(out, 3) * self.scale
+            out = self.norm.inverse_transform(out)
 
         if self.switcher.get(self.case) == "nrt_std":
             out = self.std.inverse_transform(input_data)
